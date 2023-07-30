@@ -1,12 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <thread>
-
+#include <mutex>
 
 void printing_prime_numbers(int, int);
 void task_1();
 void printing_perfect_numbers(int, int);
 void task_2();
+
+//Global variables
+std::mutex m;
 
 int main()
 {
@@ -55,7 +58,9 @@ void printing_prime_numbers(int a, int b)
 		}
 		if (flag == true)
 		{
+			m.lock();
 			std::cout << i << std::endl;
+			m.unlock();
 			++count;
 		}
 	}
